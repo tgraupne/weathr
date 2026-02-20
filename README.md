@@ -41,6 +41,28 @@ cd weathr
 cargo install --path .
 ```
 
+### Build Docker Image
+
+Enable auto location (uses IP-based lookup; less private):
+
+```bash
+docker build -t weathr:auto --build-arg GEO_AUTO=true .
+```
+
+Bake Munich coords, metric units, no auto-IP geolocation:
+
+```bash
+docker build -t weathr:munich \
+  --build-arg WEATHR_REF=v1.3.0 \
+  --build-arg GEO_AUTO=false \
+  --build-arg GEO_LATITUDE=48.137154 \
+  --build-arg GEO_LONGITUDE=11.576124 \
+  --build-arg UNIT_TEMPERATURE=celsius \
+  --build-arg UNIT_WIND_SPEED=kmh \
+  --build-arg UNIT_PRECIPITATION=mm \
+  .
+```
+
 ### Homebrew (macOS)
 
 ```bash
@@ -236,6 +258,12 @@ Examples:
 ```bash
 # Disable colors for accessibility
 NO_COLOR=1 weathr
+```
+
+### Docker Image
+
+```bash
+docker run --rm -it weathr:munich
 ```
 
 ## Privacy
