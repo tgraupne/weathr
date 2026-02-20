@@ -72,7 +72,7 @@ ENV XDG_CONFIG_HOME=/config
 COPY --from=build /src/target/x86_64-unknown-linux-musl/release/weathr /weathr
 COPY --from=cfg /out/weathr/config.toml /config/weathr/config.toml
 
-# Critical for HTTPS / reqwest
+# Critical for HTTPS / request
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 ENTRYPOINT ["/weathr"]
